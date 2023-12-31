@@ -179,6 +179,10 @@ class DuckDBSession(Session):
             return sql.replace("pg_catalog.current_schemas", "current_schemas")
         elif "pg_catalog.generate_series" in sql:
             return sql.replace("pg_catalog.generate_series", "generate_series")
+        elif sql =="select pg_catalog.version()":
+            return   "SELECT 'PostgreSQL 16.1' as version"
+        elif sql =="show standard_conforming_strings":
+            return   "SELECT 'on' as standard_conforming_strings"
         return sql
 
     def in_transaction(self) -> bool:
